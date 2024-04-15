@@ -1,33 +1,19 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    // ":dependencyDashboard",
-    // ":disableRateLimiting",
-    // ":semanticCommits",
-    // "config:recommended",
-    // "docker:enableMajor",
-    "regexManagers:dockerfileVersions"
-    //"github>bjw-s/renovate-config:automerge-github-actions"
+    ":dependencyDashboard",
+    ":disableRateLimiting",
+    ":semanticCommits",
+    "config:recommended",
+    "docker:enableMajor",
+    "regexManagers:dockerfileVersions",
+    "github>bjw-s/renovate-config:automerge-github-actions"
   ],
-  //"onboarding": false,
-  //"requireConfig": "optional",
-  //"dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  //"suppressNotifications": [
-  //  "prEditedNotification",
-  //  "prIgnoreNotification"
-  //],
-  // "enabledManagers": [
-  //   "regex"
-  // ],
-  // "customManagers": [
-  //   {
-  //     "customType": "regex",
-  //     "fileMatch": [
-  //       "([Dd]ocker|[Cc]ontainer)file$"
-  //     ],
-  //     "matchStrings": [
-  //       "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n.+=(?<currentValue>\\S+)"
-  //     ]
-  //   }
-  // ]
+  "onboarding": true,
+  "requireConfig": "optional",
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "suppressNotifications": [
+    "prEditedNotification",
+    "prIgnoreNotification"
+  ]
 }
