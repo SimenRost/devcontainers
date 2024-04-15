@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - 'main'
+    paths:
+      - terraform
 
 jobs:
-  docker:
+  terraform:
     runs-on: ubuntu-latest
     permissions:
       packages: write

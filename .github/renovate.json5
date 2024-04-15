@@ -9,8 +9,6 @@
     "regexManagers:dockerfileVersions",
     "github>bjw-s/renovate-config:automerge-github-actions"
   ],
-  "onboarding": true,
-  "requireConfig": "optional",
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "suppressNotifications": [
     "prEditedNotification",
