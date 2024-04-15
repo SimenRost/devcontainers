@@ -1,0 +1,55 @@
+name: build
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4.1.1
+      -
+        name: Create VARS
+        id: vars
+        run: |
+          echo "username=$(echo ${GITHUB_REPOSITORY} | cut -d/ -f1 | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo "source=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/tree/${GITHUB_REF//refs\/heads\//}" >> $GITHUB_OUTPUT
+          echo "url=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/master/README.md" >> $GITHUB_OUTPUT
+          echo "image=$(echo ${GITHUB_REPOSITORY} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      -
+        name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ steps.vars.outputs.username }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          build-args: BUILDKIT_SBOM_SCAN_CONTEXT=true,BUILDKIT_SBOM_SCAN_STAGE=true
+          sbom: true
+          context: terraform
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: |
+            ghcr.io/${{ steps.vars.outputs.image }}:terraform
+            ghcr.io/${{ steps.vars.outputs.image }}:terraform-${{ github.sha }}
+          labels: |
+            org.opencontainers.image.source=${{ steps.vars.outputs.source }}
+            org.opencontainers.image.url=${{ steps.vars.outputs.url }}
