@@ -63,7 +63,7 @@ RUN \
 
 FROM scratch AS binlayer
 
-COPY --from=hashicorp/terraform:1.7.5 /bin/terraform /out/usr/bin/terraform
+COPY --from=hashicorp/terraform:1.8.2 /bin/terraform /out/usr/bin/terraform
 
 COPY --from=ghcr.io/homebrew/core/terraform-docs:0.17.0 /terraform-docs/*/bin/* /out/usr/bin
 COPY --from=ghcr.io/homebrew/core/terraform-docs:0.17.0 /terraform-docs/*/etc/* /out/etc
