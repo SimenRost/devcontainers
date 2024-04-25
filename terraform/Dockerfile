@@ -3,7 +3,8 @@
 FROM mcr.microsoft.com/devcontainers/base:bullseye@sha256:7c391a762d4ec15a6c279189a03ed3582aa8dadda8300921562cc95ddf100816 AS baseimage
 
 RUN \
-    usermod -s /bin/zsh vscode
+    usermod -s /bin/zsh vscode && \
+    rm -rf /home/vscode/.oh-my-zsh
 
 FROM busybox:1.36.1-glibc AS bat
 
@@ -31,8 +32,34 @@ RUN \
     tar xf \
     /tmp/jnv.tar.gz -C \
     /tmp/jnv/ --strip-components=1 && \
-    ls /tmp/ && \
     mv /tmp/jnv/jnv /out/usr/bin/jnv
+
+FROM  busybox:1.36.1-glibc AS fzf
+
+# renovate: datasource=github-releases depName=junegunn/fzf
+ENV FZF_VERSION=0.50.0
+
+RUN \
+    mkdir -p /tmp/fzf /out/usr/bin && \
+    wget -O /tmp/fzf.tar.gz https://github.com/junegunn/fzf/releases/download/$FZF_VERSION/fzf-$FZF_VERSION-linux_amd64.tar.gz && \
+    tar xf \
+    /tmp/fzf.tar.gz -C \
+    /tmp/fzf/ --strip-components=1 && \
+    mv /tmp/fzf/fzf /out/usr/bin/fzf
+
+FROM  busybox:1.36.1-glibc AS pwsh
+
+# renovate: datasource=github-releases depName=PowerShell/PowerShell
+ENV PWSH_VERSION=7.4.2
+
+RUN \
+    mkdir -p /tmp/pwsh /out/pwsh && \
+    wget -O /tmp/pwsh.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v$PWSH_VERSION/powershell-$PWSH_VERSION-linux-x64.tar.gz  && \
+    tar xf \
+    /tmp/pwsh.tar.gz -C \
+    /tmp/pwsh/ && \
+    ls -la && \
+    mv /tmp/pwsh /out
 
 FROM scratch AS binlayer
 
@@ -46,6 +73,8 @@ COPY --from=ghcr.io/jqlang/jq:1.7.1 /jq /out/usr/bin/jq
 
 COPY --from=bat /out /out
 COPY --from=jnv /out /out
+COPY --from=pwsh /out /out
+
 
 FROM baseimage
 
@@ -53,4 +82,5 @@ COPY --from=binlayer --chmod=755 --chown=root:root /out /
 
 RUN \
     sudo chown vscode:vscode -R /usr/local/share/zsh/site-functions && \
-    sudo chmod 755 -R /usr/local/share/zsh/site-functions
+    sudo chmod 755 -R /usr/local/share/zsh/site-functions && \
+    ln -s /pwsh/pwsh /usr/bin/pwsh
