@@ -6,8 +6,9 @@
     ":semanticCommits",
     "config:recommended",
     "docker:enableMajor",
-    "regexManagers:dockerfileVersions",
     "github>bjw-s/renovate-config:automerge-github-actions"
+    "regexManagers:dockerfileVersions",
+    "schedule:earlyMondays",
   ],
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "suppressNotifications": [
