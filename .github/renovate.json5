@@ -6,7 +6,7 @@
     ":semanticCommits",
     "config:recommended",
     "docker:enableMajor",
-    "github>bjw-s/renovate-config:automerge-github-actions"
+    "github>bjw-s/renovate-config:automerge-github-actions",
     "regexManagers:dockerfileVersions",
     "schedule:earlyMondays",
   ],
