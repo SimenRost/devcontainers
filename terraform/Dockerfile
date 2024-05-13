@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM mcr.microsoft.com/devcontainers/base:bullseye@sha256:7c391a762d4ec15a6c279189a03ed3582aa8dadda8300921562cc95ddf100816 AS baseimage
+FROM mcr.microsoft.com/devcontainers/base:bullseye@sha256:8f85d8372ecdf793545e222474cab6fe2803ce76a42668d9ed471f3da6663410 AS baseimage
 
 RUN \
     usermod -s /bin/zsh vscode && \
