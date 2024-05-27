@@ -3,8 +3,7 @@
 FROM mcr.microsoft.com/devcontainers/base:bullseye@sha256:8f85d8372ecdf793545e222474cab6fe2803ce76a42668d9ed471f3da6663410 AS baseimage
 
 RUN \
-    usermod -s /bin/zsh vscode && \
-    rm -rf /home/vscode/.oh-my-zsh
+    usermod -s /bin/zsh vscode
 
 FROM busybox:1.36.1-glibc AS bat
 
