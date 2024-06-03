@@ -3,6 +3,8 @@
 FROM mcr.microsoft.com/devcontainers/base:bullseye@sha256:8f85d8372ecdf793545e222474cab6fe2803ce76a42668d9ed471f3da6663410 AS baseimage
 
 RUN \
+    rm -rf /home/vscode/.oh-my-zsh && \
+    rm -rf /home/vscode/.zshrc && \
     usermod -s /bin/zsh vscode
 
 FROM busybox:1.36.1-glibc AS bat
@@ -46,6 +48,35 @@ RUN \
     /tmp/fzf/ --strip-components=1 && \
     mv /tmp/fzf/fzf /out/usr/bin/fzf
 
+FROM  busybox:1.36.1-glibc AS eza
+
+# renovate: datasource=github-releases depName=eza-community/eza
+ENV EZA_VERSION=0.18.16
+
+RUN \
+    mkdir -p /tmp/eza /tmp/eza_comp /out/usr/local/share/zsh/site-functions /out/etc/bash_completion.d /out/usr/bin && \
+    wget -O /tmp/eza.tar.gz https://github.com/eza-community/eza/releases/download/v$EZA_VERSION/eza_x86_64-unknown-linux-gnu.tar.gz  && \
+    wget -O /tmp/eza_comp.tar.gz https://github.com/eza-community/eza/releases/download/v$EZA_VERSION/completions-$EZA_VERSION.tar.gz  && \
+    tar xf \
+    /tmp/eza.tar.gz -C \
+    /tmp/eza/ --strip-components=1 && \
+    tar xf \
+    /tmp/eza_comp.tar.gz -C \
+    /tmp/eza_comp/ --strip-components=1 && \
+    mv /tmp/eza/eza /out/usr/bin/eza && \
+    mv /tmp/eza_comp/target/completions-$EZA_VERSION/_eza /out/usr/local/share/zsh/site-functions/_eza && \
+    mv /tmp/eza_comp/target/completions-$EZA_VERSION/eza /out/etc/bash_completion.d/eza
+
+FROM  busybox:1.36.1-glibc AS omp
+
+# renovate: datasource=github-releases depName=/jandedobbeleer/oh-my-posh
+ENV OMP_VERSION=21.2.0
+
+RUN \
+    mkdir -p /out/usr/bin && \
+    wget -O /tmp/omp https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v$OMP_VERSION/posh-linux-amd64 && \
+    mv /tmp/omp /out/usr/bin/oh-my-posh
+
 FROM  busybox:1.36.1-glibc AS pwsh
 
 # renovate: datasource=github-releases depName=PowerShell/PowerShell
@@ -62,6 +93,8 @@ RUN \
 
 FROM scratch AS binlayer
 
+COPY --from=ghcr.io/roxedus/dotfiles:18688787df485b3f21f3c78818d18397a8d4e6f0 /out /out/home/vscode
+
 COPY --from=hashicorp/terraform:1.8.4 /bin/terraform /out/usr/bin/terraform
 
 COPY --from=ghcr.io/homebrew/core/terraform-docs:0.17.0 /terraform-docs/*/bin/* /out/usr/bin
@@ -71,7 +104,9 @@ COPY --from=ghcr.io/homebrew/core/terraform-docs:0.17.0 /terraform-docs/*/share/
 COPY --from=ghcr.io/jqlang/jq:1.7.1 /jq /out/usr/bin/jq
 
 COPY --from=bat /out /out
+COPY --from=eza /out /out
 COPY --from=jnv /out /out
+COPY --from=omp /out /out
 COPY --from=pwsh /out /out
 
 
@@ -81,5 +116,6 @@ COPY --from=binlayer --chmod=755 --chown=root:root /out /
 
 RUN \
     sudo chown vscode:vscode -R /usr/local/share/zsh/site-functions && \
+    sudo chown vscode:vscode -R /home/vscode && \
     sudo chmod 755 -R /usr/local/share/zsh/site-functions && \
     ln -s /pwsh/pwsh /usr/bin/pwsh
