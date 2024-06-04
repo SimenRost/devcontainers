@@ -45,7 +45,7 @@ RUN \
     wget -O /tmp/fzf.tar.gz https://github.com/junegunn/fzf/releases/download/$FZF_VERSION/fzf-$FZF_VERSION-linux_amd64.tar.gz && \
     tar xf \
     /tmp/fzf.tar.gz -C \
-    /tmp/fzf/ --strip-components=1 && \
+    /tmp/fzf/ && \
     mv /tmp/fzf/fzf /out/usr/bin/fzf
 
 FROM  busybox:1.36.1-glibc AS eza
