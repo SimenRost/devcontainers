@@ -69,7 +69,7 @@ RUN \
 
 FROM  busybox:1.36.1-glibc AS omp
 
-# renovate: datasource=github-releases depName=/jandedobbeleer/oh-my-posh
+# renovate: datasource=github-releases depName=jandedobbeleer/oh-my-posh
 ENV OMP_VERSION=21.2.0
 
 RUN \
