@@ -119,4 +119,5 @@ RUN \
     sudo chown vscode:vscode -R /usr/local/share/zsh/site-functions && \
     sudo chown vscode:vscode -R /home/vscode && \
     sudo chmod 755 -R /usr/local/share/zsh/site-functions && \
+    rm /home/vscode/.gitconfig && \
     ln -s /pwsh/pwsh /usr/bin/pwsh
