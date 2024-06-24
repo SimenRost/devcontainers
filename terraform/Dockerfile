@@ -89,7 +89,7 @@ RUN \
 FROM  busybox:1.36.1-glibc AS pwsh
 
 # renovate: datasource=github-releases depName=PowerShell/PowerShell
-ENV PWSH_VERSION=7.4.2
+ENV PWSH_VERSION=7.4.3
 
 RUN \
   mkdir -p /tmp/pwsh /out/pwsh && \
