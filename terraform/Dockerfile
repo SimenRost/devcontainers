@@ -104,7 +104,7 @@ FROM scratch AS binlayer
 
 COPY --from=ghcr.io/roxedus/dotfiles:latest@sha256:2645fd0879a4597dcb2c13e05229954189e3757668581214b81d42782de5f20a /out /out/home/vscode
 
-COPY --from=hashicorp/terraform:1.8.5 /bin/terraform /out/usr/bin/terraform
+COPY --from=hashicorp/terraform:1.9.3 /bin/terraform /out/usr/bin/terraform
 
 COPY --from=ghcr.io/homebrew/core/terraform-docs:0.18.0 /terraform-docs/*/bin/* /out/usr/bin
 COPY --from=ghcr.io/homebrew/core/terraform-docs:0.18.0 /terraform-docs/*/etc/* /out/etc
