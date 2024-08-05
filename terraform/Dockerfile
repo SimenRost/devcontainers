@@ -46,7 +46,7 @@ RUN \
 FROM  busybox:1.36.1-glibc AS fzf
 
 # renovate: datasource=github-releases depName=junegunn/fzf
-ENV FZF_VERSION=0.53.0
+ENV FZF_VERSION=v0.54.3
 
 RUN \
   mkdir -p /tmp/fzf /out/usr/bin && \
