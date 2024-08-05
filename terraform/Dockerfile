@@ -50,7 +50,7 @@ ENV FZF_VERSION=v0.54.3
 
 RUN \
   mkdir -p /tmp/fzf /out/usr/bin && \
-  wget -O /tmp/fzf.tar.gz https://github.com/junegunn/fzf/releases/download/$FZF_VERSION/fzf-$FZF_VERSION-linux_amd64.tar.gz && \
+  wget -O /tmp/fzf.tar.gz https://github.com/junegunn/fzf/releases/download/$FZF_VERSION/fzf-${FZF_VERSION#v}-linux_amd64.tar.gz && \
   wget -O /out/usr/bin/fzf-tmux https://raw.githubusercontent.com/junegunn/fzf/$FZF_VERSION/bin/fzf-tmux && \
   tar xf \
   /tmp/fzf.tar.gz -C \
