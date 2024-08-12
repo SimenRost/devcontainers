@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM mcr.microsoft.com/devcontainers/base:bullseye@sha256:e0582c7e9ef8095b05d76ce2293cb58c65f4fc4c38e0b02cbbbefa61beb51930 AS baseimage
+FROM mcr.microsoft.com/devcontainers/base:bullseye@sha256:9fa3c77707ee9ebf862010324fd8c79e0571a01b5375c535afa1600b20657a99 AS baseimage
 
 RUN \
   rm -rf /home/vscode/.oh-my-zsh && \
