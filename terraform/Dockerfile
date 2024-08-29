@@ -7,8 +7,9 @@ RUN \
   rm -rf /home/vscode/.zshrc && \
   apt update && \
   apt install -y --no-install-recommends \
-  vim \
-  tmux && \
+  file \
+  tmux \
+  vim && \
   usermod -s /bin/zsh vscode && \
   rm -rf \
   /tmp/* \
