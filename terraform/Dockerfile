@@ -103,7 +103,7 @@ RUN \
 
 FROM scratch AS binlayer
 
-COPY --from=ghcr.io/roxedus/dotfiles:latest@sha256:011d7e0ed744b0256330bf14bc1a0f5b9f79a37be13c5025ad64ac6075144e40 /out /out/home/vscode
+COPY --from=ghcr.io/roxedus/dotfiles:latest@sha256:1c23f024acc0327cd7cdcd381090d01d667e9f086f0b163c0a82400f4429d071 /out /out/home/vscode
 
 COPY --from=hashicorp/terraform:1.9.5 /bin/terraform /out/usr/bin/terraform
 
