@@ -16,7 +16,7 @@ RUN \
   /var/lib/apt/lists/* \
   /var/tmp/*
 
-FROM busybox:1.36.1-glibc AS bat
+FROM busybox:1.37.0-glibc AS bat
 
 # renovate: datasource=github-releases depName=sharkdp/bat
 ENV BAT_VERSION=0.24.0
@@ -31,7 +31,7 @@ RUN \
   mv /tmp/bat/autocomplete/bat.zsh /out/usr/local/share/zsh/site-functions/_bat && \
   mv /tmp/bat/autocomplete/bat.bash /out/etc/bash_completion.d/bat
 
-FROM  busybox:1.36.1-glibc AS jnv
+FROM  busybox:1.37.0-glibc AS jnv
 
 # renovate: datasource=github-releases depName=ynqa/jnv
 ENV JNV_VERSION=0.4.1
@@ -44,7 +44,7 @@ RUN \
   /tmp/jnv/ --strip-components=1 && \
   mv /tmp/jnv/jnv /out/usr/bin/jnv
 
-FROM  busybox:1.36.1-glibc AS fzf
+FROM  busybox:1.37.0-glibc AS fzf
 
 # renovate: datasource=github-releases depName=junegunn/fzf
 ENV FZF_VERSION=v0.55.0
@@ -58,7 +58,7 @@ RUN \
   /tmp/fzf/ && \
   mv /tmp/fzf/fzf /out/usr/bin/fzf
 
-FROM  busybox:1.36.1-glibc AS eza
+FROM  busybox:1.37.0-glibc AS eza
 
 # renovate: datasource=github-releases depName=eza-community/eza
 ENV EZA_VERSION=0.20.1
@@ -77,7 +77,7 @@ RUN \
   mv /tmp/eza_comp/target/completions-$EZA_VERSION/_eza /out/usr/local/share/zsh/site-functions/_eza && \
   mv /tmp/eza_comp/target/completions-$EZA_VERSION/eza /out/etc/bash_completion.d/eza
 
-FROM  busybox:1.36.1-glibc AS omp
+FROM  busybox:1.37.0-glibc AS omp
 
 # renovate: datasource=github-releases depName=jandedobbeleer/oh-my-posh
 ENV OMP_VERSION=23.16.0
@@ -87,7 +87,7 @@ RUN \
   wget -O /tmp/omp https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v$OMP_VERSION/posh-linux-amd64 && \
   mv /tmp/omp /out/usr/bin/oh-my-posh
 
-FROM  busybox:1.36.1-glibc AS pwsh
+FROM  busybox:1.37.0-glibc AS pwsh
 
 # renovate: datasource=github-releases depName=PowerShell/PowerShell
 ENV PWSH_VERSION=7.4.5
