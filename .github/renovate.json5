@@ -1,18 +1,18 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    ":dependencyDashboard",
-    ":disableRateLimiting",
-    ":semanticCommits",
-    "config:recommended",
-    "docker:enableMajor",
-    "github>bjw-s/renovate-config:automerge-github-actions",
-    "regexManagers:dockerfileVersions",
-    "schedule:earlyMondays",
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    ':dependencyDashboard',
+    ':disableRateLimiting',
+    ':semanticCommits',
+    'config:recommended',
+    'docker:enableMajor',
+    'github>bjw-s/renovate-config:automerge-github-actions',
+    'customManagers:dockerfileVersions',
+    'schedule:earlyMondays',
   ],
-  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  "suppressNotifications": [
-    "prEditedNotification",
-    "prIgnoreNotification"
-  ]
+  dependencyDashboardTitle: 'Renovate Dashboard 🤖',
+  suppressNotifications: [
+    'prEditedNotification',
+    'prIgnoreNotification',
+  ],
 }
