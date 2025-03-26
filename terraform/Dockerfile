@@ -61,7 +61,7 @@ RUN \
 FROM  busybox:1.37.0-glibc AS eza
 
 # renovate: datasource=github-releases depName=eza-community/eza
-ENV EZA_VERSION=0.20.23
+ENV EZA_VERSION=0.20.24
 
 RUN \
   mkdir -p /tmp/eza /tmp/eza_comp /out/usr/local/share/zsh/site-functions /out/etc/bash_completion.d /out/usr/bin && \
