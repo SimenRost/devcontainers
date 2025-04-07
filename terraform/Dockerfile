@@ -107,9 +107,9 @@ COPY --from=ghcr.io/roxedus/dotfiles:latest@sha256:753df9bc51990995b669e1e5e6af9
 
 COPY --from=hashicorp/terraform:1.11.2 /bin/terraform /out/usr/bin/terraform
 
-COPY --from=ghcr.io/homebrew/core/terraform-docs:0.19.0 /terraform-docs/*/bin/* /out/usr/bin
-COPY --from=ghcr.io/homebrew/core/terraform-docs:0.19.0 /terraform-docs/*/etc/* /out/etc
-COPY --from=ghcr.io/homebrew/core/terraform-docs:0.19.0 /terraform-docs/*/share/* /out/usr/local/share/
+COPY --from=ghcr.io/homebrew/core/terraform-docs:0.20.0 /terraform-docs/*/bin/* /out/usr/bin
+COPY --from=ghcr.io/homebrew/core/terraform-docs:0.20.0 /terraform-docs/*/etc/* /out/etc
+COPY --from=ghcr.io/homebrew/core/terraform-docs:0.20.0 /terraform-docs/*/share/* /out/usr/local/share/
 
 COPY --from=ghcr.io/jqlang/jq:1.7.1 /jq /out/usr/bin/jq
 
