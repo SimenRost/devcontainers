@@ -80,7 +80,7 @@ RUN \
 FROM  busybox:1.37.0-glibc AS omp
 
 # renovate: datasource=github-releases depName=jandedobbeleer/oh-my-posh
-ENV OMP_VERSION=25.23.2
+ENV OMP_VERSION=25.23.3
 
 RUN \
   mkdir -p /out/usr/bin && \
