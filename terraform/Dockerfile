@@ -111,7 +111,7 @@ COPY --from=ghcr.io/homebrew/core/terraform-docs:0.20.0 /terraform-docs/*/bin/* 
 COPY --from=ghcr.io/homebrew/core/terraform-docs:0.20.0 /terraform-docs/*/etc/* /out/etc
 COPY --from=ghcr.io/homebrew/core/terraform-docs:0.20.0 /terraform-docs/*/share/* /out/usr/local/share/
 
-COPY --from=ghcr.io/jqlang/jq:1.8.0 /jq /out/usr/bin/jq
+COPY --from=ghcr.io/jqlang/jq:1.8.1 /jq /out/usr/bin/jq
 
 COPY --from=bat /out /out
 COPY --from=eza /out /out
