@@ -34,7 +34,7 @@ RUN \
 FROM  busybox:1.37.0-glibc AS jnv
 
 # renovate: datasource=github-releases depName=ynqa/jnv
-ENV JNV_VERSION=0.6.0
+ENV JNV_VERSION=0.6.1
 
 RUN \
   mkdir -p /tmp/jnv /out/usr/bin && \
