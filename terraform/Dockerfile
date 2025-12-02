@@ -19,7 +19,7 @@ RUN \
 FROM busybox:1.37.0-glibc AS bat
 
 # renovate: datasource=github-releases depName=sharkdp/bat
-ENV BAT_VERSION=0.25.0
+ENV BAT_VERSION=0.26.1
 
 RUN \
   mkdir -p /tmp/bat /out/usr/bin /out/usr/local/share/zsh/site-functions /out/etc/bash_completion.d && \
